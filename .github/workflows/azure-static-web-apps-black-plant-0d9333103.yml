@@ -25,6 +25,9 @@ jobs:
 
       - name: Install Quasar CLI
         run: npm install -g @quasar/cli
+        
+      - name: Axios
+        run: npm install axios
 
       - name: Install dependencies
         run: npm ci
