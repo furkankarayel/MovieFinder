@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page :key="componentKey">
     <div
       class="q-pa-md"
       style="
@@ -23,7 +23,7 @@
               :src="`https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`"
               class="col"
               style="max-width 300px;height: 300px"
-              ><div class="absolute-bottom h6">{{ movie.title }}</div>
+              ><div class="absolute-bottom text-h6">{{ movie.title }}</div>
             </q-img>
             <q-card-section>
               <p
@@ -32,7 +32,7 @@
               >
                 {{ movie.overview.slice(0, 100)
                 }}<span
-                  class="primary"
+                  class="text-primary"
                   v-if="!movie.readActivated"
                   @click="movie.readActivated = true"
                   >..mehr Anzeigen</span
@@ -41,14 +41,14 @@
               <p class="p" v-else-if="movie.readActivated">
                 {{ movie.overview }}
                 <span
-                  class="primary"
+                  class="text-primary"
                   v-if="movie.readActivated"
                   @click="movie.readActivated = false"
                   >..weniger Anzeigen</span
                 >
               </p>
 
-              <div class="subtitle">
+              <div class="text-subtitle">
                 Veröffentlichung: {{ movie.release_date }}
               </div>
               <q-rating
@@ -74,7 +74,7 @@
     <q-btn
       v-if="search === ''"
       color="primary"
-      @click="loadMoreMain()"
+      @click="loadSearch()"
       :disable="!hasMore"
     >
       Load More
@@ -82,7 +82,7 @@
     <q-btn
       v-else-if="search != ''"
       color="primary"
-      @click="loadMoreSearch()"
+      @click="loadSearch()"
       :disable="!hasMore"
     >
       Load More
@@ -92,66 +92,48 @@
 
 <script>
 import axios from "axios";
+import { useRoute, beforeRouteUpdate } from "vue-router";
 
 export default {
+  name: "MovieSearch",
+
   data() {
     return {
-      search: "",
       movies: [],
+      search: "",
       loading: false,
       hasMore: true,
       page: 1,
+      componentKey: 0,
       API_KEY: "b64351ccceddb3a8d6fdb933ce0713d2",
     };
   },
-  mounted() {
-    this.loadDiscoverMovies();
+  created() {
+    console.log("Created: " + this.$router.currentRoute._value.query.search);
+    const route = useRoute();
+
+    const queryParam = route.query;
+    this.search = queryParam.search;
+    this.searchMovies();
+
+    return { route };
   },
+
   methods: {
+    getData() {
+      console.log("yeah?");
+    },
     searchMovies() {
-      this.movies = [];
+      this.search = this.$router.currentRoute._value.query.search;
       this.page = 1;
       this.hasMore = true;
-      this.loadMoreSearch();
-    },
-    async loadDiscoverMovies() {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${this.API_KEY}&language=de-DE`
-        )
-        .then((response) => {
-          const moviesResponse = response.data.results;
-          for (const post of moviesResponse) {
-            post.readActivated = false;
-          }
-          this.movies = moviesResponse;
-
-          console.log(this.movies);
-        });
+      this.loading = false;
+      this.loadSearch();
     },
     viewMovie(id) {
       this.$router.push({ name: "movie", params: { id } });
     },
-    async loadMoreMain() {
-      if (this.loading || !this.hasMore) {
-        return;
-      }
-      this.loading = true;
-
-      try {
-        this.page += 1;
-        const { data } = await axios.get(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${this.API_KEY}&language=de-DE&page=${this.page}`
-        );
-        this.movies = [...this.movies, ...data.results];
-        this.hasMore = data.results.length === 20;
-      } catch (e) {
-        console.log(e);
-      } finally {
-        this.loading = false;
-      }
-    },
-    async loadMoreSearch() {
+    async loadSearch() {
       if (this.loading || !this.hasMore) {
         return;
       }
