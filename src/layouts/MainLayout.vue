@@ -2,7 +2,9 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-toolbar-title> Moviefinder App </q-toolbar-title>
+        <q-toolbar-title class="text-h4">
+          <q-item to="/" class="text-white"> Moviefinder App </q-item>
+        </q-toolbar-title>
         <movie-search />
       </q-toolbar>
     </q-header>

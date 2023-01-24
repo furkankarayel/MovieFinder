@@ -1,5 +1,5 @@
 <template>
-  <q-page :key="componentKey">
+  <q-page>
     <div
       class="q-pa-md"
       style="
@@ -27,111 +27,170 @@
             </q-img>
             <q-card-section>
               <p
-                class="p"
+                class="text"
                 v-if="!movie.readActivated && movie.overview.length > 1"
               >
                 {{ movie.overview.slice(0, 100)
                 }}<span
-                  class="text-primary"
+                  class="primary"
                   v-if="!movie.readActivated"
                   @click="movie.readActivated = true"
                   >..mehr Anzeigen</span
                 >
               </p>
-              <p class="p" v-else-if="movie.readActivated">
+              <p class="text" v-else-if="movie.readActivated">
                 {{ movie.overview }}
                 <span
-                  class="text-primary"
+                  class="primary"
                   v-if="movie.readActivated"
                   @click="movie.readActivated = false"
                   >..weniger Anzeigen</span
                 >
               </p>
-
-              <div class="text-subtitle">
-                Veröffentlichung: {{ movie.release_date }}
-              </div>
-              <q-rating
-                v-model="movie.vote_average"
-                max="10"
-                size="1.5em"
-                color="green-4"
-                icon="star_border"
-                icon-selected="star"
-                icon-half="star_half"
-                class=""
-                no-dimming
-              />
             </q-card-section>
             <q-card-actions>
-              <q-btn color="primary" @click="viewMovie(movie.id)">Mehr</q-btn>
+              <q-btn color="primary" @click="viewMovie(movie.id)"
+                >Mehr Anzeigen</q-btn
+              >
             </q-card-actions>
           </q-card>
         </q-intersection>
       </div>
     </div>
+    <div
+      style="display: flex; justify-content: center; align-items: center"
+      class="q-pa-lg"
+    >
+      <q-btn
+        v-if="search === ''"
+        color="primary"
+        @click="loadMoreMain()"
+        :disable="!hasMore"
+      >
+        Load More
+      </q-btn>
+      <q-btn
+        v-else-if="search != ''"
+        color="primary"
+        @click="loadMoreSearch()"
+        :disable="!hasMore"
+      >
+        Load More
+      </q-btn>
+    </div>
+    <q-dialog v-model="detail">
+      <q-card style="width: 400px; min-height: 500px; height: auto">
+        <q-img
+          :src="`https://image.tmdb.org/t/p/w300/${movieDetail.backdrop_path}`"
+          class="col"
+          style="max-width 150px;height: 200px"
+        />
 
-    <q-btn
-      v-if="search === ''"
-      color="primary"
-      @click="loadSearch()"
-      :disable="!hasMore"
-    >
-      Load More
-    </q-btn>
-    <q-btn
-      v-else-if="search != ''"
-      color="primary"
-      @click="loadSearch()"
-      :disable="!hasMore"
-    >
-      Load More
-    </q-btn>
+        <q-card-section>
+          <div class="text-h5 q-pb-md">{{ movieDetail.title }}</div>
+
+          <q-separator />
+          <p class="q-pt-md">
+            {{ movieDetail.overview }}
+          </p>
+        </q-card-section>
+        <q-card-section>
+          Genres:
+          <q-chip
+            square
+            outline
+            color="primary"
+            class="q-pa-xs"
+            v-for="genre in movieDetail.genres"
+            :key="genre.id"
+          >
+            {{ genre.name }}
+          </q-chip>
+        </q-card-section>
+        <q-separator />
+        <q-card-section>
+          <q-rating
+            v-model="movieDetail.vote_average"
+            max="10"
+            size="1.5em"
+            color="green-4"
+            icon="star_border"
+            icon-selected="star"
+            icon-half="star_half"
+            class=""
+            no-dimming
+          />
+          <div class="q-pa-xs">{{ movieDetail.vote_count }} Bewertungen</div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
 <script>
 import axios from "axios";
-import { useRoute, beforeRouteUpdate } from "vue-router";
+import { useRoute } from "vue-router";
 
 export default {
   name: "MovieSearch",
 
   data() {
     return {
-      movies: [],
       search: "",
+      movies: [],
+      genres: [],
+      movieDetail: [],
       loading: false,
       hasMore: true,
       page: 1,
-      componentKey: 0,
+      detail: false,
       API_KEY: "b64351ccceddb3a8d6fdb933ce0713d2",
     };
   },
   created() {
-    console.log("Created: " + this.$router.currentRoute._value.query.search);
+    this.loadGenres();
     const route = useRoute();
 
     const queryParam = route.query;
     this.search = queryParam.search;
     this.searchMovies();
-
-    return { route };
   },
-
   methods: {
-    getData() {
-      console.log("yeah?");
+    async loadGenres() {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/genre/movie/list?api_key=${this.API_KEY}&language=de-DE`
+        )
+        .then((response) => {
+          const genresResponse = response.data.genres;
+          this.genres = genresResponse;
+        });
     },
     searchMovies() {
       this.search = this.$router.currentRoute._value.query.search;
+
+      this.movieDetail = [];
       this.page = 1;
       this.hasMore = true;
-      this.loading = false;
       this.loadSearch();
     },
     viewMovie(id) {
-      this.$router.push({ name: "movie", params: { id } });
+      this.movieDetail = this.movies.find((element) => element.id === id);
+
+      let genresWithName = [];
+      let newMovieDetail = this.movieDetail;
+      const detailGernes = this.movieDetail.genre_ids;
+      for (var i = 0; i < detailGernes.length; i++) {
+        let genreObject = this.genres.find(
+          (element) => element.id === detailGernes[i]
+        );
+        genresWithName.push(genreObject);
+      }
+
+      newMovieDetail.genres = genresWithName;
+
+      this.movieDetail = newMovieDetail;
+      this.detail = true;
     },
     async loadSearch() {
       if (this.loading || !this.hasMore) {
