@@ -32,27 +32,32 @@
                 class="text"
                 v-if="!movie.readActivated && movie.overview.length > 1"
               >
-                {{ movie.overview.slice(0, 100)
-                }}<span
-                  class="primary"
+                {{ movie.overview.slice(0, 150) }}
+                <br />
+
+                <q-btn
+                  size="xs"
+                  style="color: grey"
                   v-if="!movie.readActivated"
                   @click="movie.readActivated = true"
-                  >..mehr Anzeigen</span
+                  >mehr Anzeigen</q-btn
                 >
               </p>
               <p class="text" v-else-if="movie.readActivated">
                 {{ movie.overview }}
-                <span
-                  class="primary"
+                <br />
+                <q-btn
+                  size="xs"
+                  style="color: grey"
                   v-if="movie.readActivated"
                   @click="movie.readActivated = false"
-                  >..weniger Anzeigen</span
+                  >weniger Anzeigen</q-btn
                 >
               </p>
             </q-card-section>
             <q-card-actions>
-              <q-btn color="primary" @click="viewMovie(movie.id)"
-                >Mehr Anzeigen</q-btn
+              <q-btn color="primary" size="md" @click="viewMovie(movie.id)"
+                >Mehr Info</q-btn
               >
             </q-card-actions>
           </q-card>
@@ -195,7 +200,6 @@ export default {
       }
 
       newMovieDetail.genres = genresWithName;
-
       this.movieDetail = newMovieDetail;
       this.detail = true;
     },
@@ -203,8 +207,8 @@ export default {
       if (this.loading || !this.hasMore) {
         return;
       }
-      this.loading = true;
 
+      this.loading = true;
       try {
         this.page += 1;
         const { data } = await axios.get(

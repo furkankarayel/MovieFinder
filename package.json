@@ -1,8 +1,8 @@
 {
   "name": "vue",
   "version": "1.0.0",
-  "description": "Vue Quasar Project",
-  "productName": "WebProg Project",
+  "description": "A small web application for searching Movies or just explore random ones. This project was done by Furkan Karayel.",
+  "productName": "Moviefinder App",
   "author": "Furkan Karayel",
   "private": true,
   "scripts": {

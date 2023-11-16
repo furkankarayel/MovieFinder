@@ -144,9 +144,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `WebProg Project`,
-        short_name: `WebProg Project`,
-        description: `Vue Quasar Project`,
+        name: `Moviefinder App`,
+        short_name: `Moviefinder`,
+        description: `A small web application for searching Movies or just explore random ones. This project was done by Furkan Karayel.`,
         display: "standalone",
         orientation: "portrait",
         background_color: "#ffffff",

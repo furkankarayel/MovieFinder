@@ -132,8 +132,6 @@ import axios from "axios";
 import { useRoute } from "vue-router";
 
 export default {
-  name: "MovieSearch",
-
   data() {
     return {
       search: "",
@@ -188,7 +186,6 @@ export default {
       }
 
       newMovieDetail.genres = genresWithName;
-
       this.movieDetail = newMovieDetail;
       this.detail = true;
     },

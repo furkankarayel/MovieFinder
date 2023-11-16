@@ -5,7 +5,7 @@
     v-model="search"
     input-class="text-left"
     class="q-ml-md absolute-center"
-    placeholder="z.B.: Terminator"
+    placeholder="Bsp.: Terminator"
     @keyup.enter="doSearch"
   >
     <template v-slot:append>
@@ -28,7 +28,6 @@ export default {
   methods: {
     doSearch() {
       const search = this.search;
-
       this.$router.push({ name: "results", query: { search: search } });
     },
   },
