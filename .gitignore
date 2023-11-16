@@ -4,6 +4,8 @@ node_modules
 .vscode
 .github/workflows
 
+package-lock.json
+
 # Quasar core related directories
 .quasar
 /dist
