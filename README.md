@@ -1,4 +1,6 @@
-![MovieFinder Logo](https://i.imgur.com/qwJ87ei.png)
+
+<img src="https://i.imgur.com/qwJ87ei.png" width="250" height="250">
+
 # MovieFinder Project
 
 A small web application for searching Movies or just explore random ones. This project was done by Furkan Karayel.
