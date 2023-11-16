@@ -1,6 +1,7 @@
-# WebProg Project (vue)
+![MovieFinder Logo](https://i.ibb.co/gPNVnw7/Movie-Finder.png)
+# MovieFinder Project
 
-Vue Quasar Project
+A small web application for searching Movies or just explore random ones. This project was done by Furkan Karayel.
 
 ## Install the dependencies
 ```bash
