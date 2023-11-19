@@ -3,7 +3,7 @@
 
 # MovieFinder Project
 
-A small web application for searching Movies or just explore random ones. This project was done by Furkan Karayel.
+A small web application for browsing Movies or just explore random ones. This project was done by Furkan Karayel.
 
 ## Install the dependencies
 ```bash
