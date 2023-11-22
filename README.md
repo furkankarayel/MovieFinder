@@ -1,7 +1,7 @@
 
 <img src="https://i.imgur.com/qwJ87ei.png" width="250" height="250">
 
-### MovieFinder Project
+## MovieFinder Project
 
 A small web application for browsing movies or exploring random ones.
 
@@ -19,15 +19,15 @@ the backend data as well as the UI components.
 If you'd like to improve the existing project, feel free to change the movie data and UI components to
 your preferred language for data fetching.
 
-### Features
+## Features
 * The index page displays the latest movies added to the themoviedb.org API.
 * The search functionality on the Index Page forwards users to the Result Page with search results.
 * The Detail Section pops up when 'More Info' is clicked, showing the movie description, genres, review count, and the star rating. (Note: Only the count of reviews is shown, not the reviews themselves.)
 * The Result Page displays the specific movies as mentioned above.
 
-### How to Install?
+## How to Install?
 You have two options to install and run the project:
-## Option 1: Local Run
+### Option 1: Local Run
 
 First, clone the project to your target directory.
 Switch to the root directory of the project and ensure you can use npm with your terminal or command prompt.
@@ -43,7 +43,7 @@ After that, you should be able to run the project locally by executing:
 npm run dev
 ```
 
-## Option 2: Docker
+### Option 2: Docker
 
 I have compiled everything you need to run the project as a developer in the 'Dockerfile'.
 
