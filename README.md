@@ -4,7 +4,10 @@
 ### MovieFinder Project
 
 A small web application for browsing movies or exploring random ones.
+
+
 <img src="https://i.imgur.com/ooUSzTy.jpeg" width="500" height="400">
+
 ## Getting Started
 This basic application is based on Vue 3 and uses the Quasar UI Framework.
 It follows the basic structure of the Quasar Framework and is easy to understand.
