@@ -1,63 +1,56 @@
+
 <img src="https://i.imgur.com/qwJ87ei.png" width="250" height="250">
-
-
-
 # MovieFinder Project
 
-A small web application for browsing Movies or just explore random ones.
-
+A small web application for browsing movies or exploring random ones.
 <img src="https://i.imgur.com/ooUSzTy.jpeg" width="500" height="400">
+## Getting Started
+This basic application is based on Vue 3 and uses the Quasar UI Framework.
+It follows the basic structure of the Quasar Framework and is easy to understand.
+The data used is from the https://themoviedb.org API.
 
-## Getting started
-This is a basic application based on Vue 3 using Quasar UI Framework.
-It uses the basic structure of Quasar Framework and is easy to understand.
-The data I am using is from https://themoviedb.org API.
+I developed this as a university project, and at that time, I preferred using the German language for 
+the backend data as well as the UI components.
 
-I have developed it as an university project so back then I prefered the german language for 
-the backend data aswell as the UI components which have been used.
-
-If you'd like to improve the existing project, feel free to change the movie data and ui components to
-your own language where the data gets fetched.
+If you'd like to improve the existing project, feel free to change the movie data and UI components to
+your preferred language for data fetching.
 
 ### Features
-* Index page which is displaying the latest movies added to themoviedb.org API.
-* Search functionality is working on the Index Page, which forwards users to the Result Page with the search results.
-* Detail Section is popping up when clicked on 'More Info' containing the description of the movie, genres, review count and lastly the star rating. (The reviews are not shown, it shows only the count)
-* Result page displays the specific movies as mentioned above.
+* The index page displays the latest movies added to the themoviedb.org API.
+* The search functionality on the Index Page forwards users to the Result Page with search results.
+* The Detail Section pops up when 'More Info' is clicked, showing the movie description, genres, review count, and the star rating. (Note: Only the count of reviews is shown, not the reviews themselves.)
+* The Result Page displays the specific movies as mentioned above.
 
-
-### How to install?
+### How to Install?
 You have two options to install and run the project:
-## Option 1: Local run
+## Option 1: Local Run
 
-First of all you need to clone the project to your target directory.
-Switch into the root dir of the project and make sure you are able to use
-npm with your terminal or cmd.
+First, clone the project to your target directory.
+Switch to the root directory of the project and ensure you can use npm with your terminal or command prompt.
 
 Then execute:
 ```
 npm install
 ```
-By the first command you install the project dependencies. 
+This command installs the project dependencies. 
 
-After you have done that you should be able to run the project locally by executing:
+After that, you should be able to run the project locally by executing:
 ```
 npm run dev
 ```
 
 ## Option 2: Docker
 
-I have put together everything you need to run the project as developer in the docker container.
+I have compiled everything you need to run the project as a developer in the 'Dockerfile'.
 
-First of all we need to switch into the project root(where the Dockerfile lies), and run the following command:
+Initially, switch to the project root (where the Dockerfile is located), and run the following command:
 ```
 docker build . -f Dockerfile -t moviefinder
 ```
 
-Now we need to run the image which has been built.
-Run:
+Next, run the built image:
 ```
 docker run moviefinder
 ```
 
-Yeah! Now the project should be running in your Docker container..
+That's it! The project should now be running in your Docker container.
