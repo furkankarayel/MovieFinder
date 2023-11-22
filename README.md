@@ -1,6 +1,7 @@
 
 <img src="https://i.imgur.com/qwJ87ei.png" width="250" height="250">
-# MovieFinder Project
+
+### MovieFinder Project
 
 A small web application for browsing movies or exploring random ones.
 <img src="https://i.imgur.com/ooUSzTy.jpeg" width="500" height="400">
