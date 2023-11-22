@@ -1,9 +1,9 @@
-
+w
 <img src="https://i.imgur.com/qwJ87ei.png" width="250" height="250">
 
 # MovieFinder Project
 
-A small web application for browsing Movies or just explore random ones. This project was done by Furkan Karayel.
+A small web project based on Vue 3 using the Quasar UI Framework. This is an application for browsing Movies or just explore random ones. This project was done by Furkan Karayel.
 
 ## Install the dependencies
 ```bash
