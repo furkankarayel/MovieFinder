@@ -30,21 +30,34 @@
                 class="text"
                 v-if="!movie.readActivated && movie.overview.length > 1"
               >
-                {{ movie.overview.slice(0, 100)
-                }}<span
-                  class="primary"
+                {{ movie.overview.slice(0, 100) }}
+                <br />
+                <span
                   v-if="!movie.readActivated"
                   @click="movie.readActivated = true"
-                  >..mehr Anzeigen</span
+                  style="
+                    color: blue;
+                    text-decoration: underline;
+                    cursor: pointer;
+                    font-size: 0.75rem; /* Adjust the font size as needed */
+                  "
                 >
+                  mehr Anzeigen
+                </span>
               </p>
               <p class="text" v-else-if="movie.readActivated">
                 {{ movie.overview }}
+                <br />
                 <span
-                  class="primary"
                   v-if="movie.readActivated"
                   @click="movie.readActivated = false"
-                  >..weniger Anzeigen</span
+                  style="
+                    color: blue;
+                    text-decoration: underline;
+                    cursor: pointer;
+                    font-size: 0.75rem; /* Adjust the font size as needed */
+                  "
+                  >weniger Anzeigen</span
                 >
               </p>
             </q-card-section>

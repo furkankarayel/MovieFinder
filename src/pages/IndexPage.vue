@@ -35,23 +35,32 @@
                 {{ movie.overview.slice(0, 150) }}
                 <br />
 
-                <q-btn
-                  size="xs"
-                  style="color: grey"
+                <span
                   v-if="!movie.readActivated"
                   @click="movie.readActivated = true"
-                  >mehr Anzeigen</q-btn
+                  style="
+                    color: blue;
+                    text-decoration: underline;
+                    cursor: pointer;
+                    font-size: 0.75rem; /* Adjust the font size as needed */
+                  "
                 >
+                  mehr Anzeigen
+                </span>
               </p>
               <p class="text" v-else-if="movie.readActivated">
                 {{ movie.overview }}
                 <br />
-                <q-btn
-                  size="xs"
-                  style="color: grey"
+                <span
                   v-if="movie.readActivated"
                   @click="movie.readActivated = false"
-                  >weniger Anzeigen</q-btn
+                  style="
+                    color: blue;
+                    text-decoration: underline;
+                    cursor: pointer;
+                    font-size: 0.75rem; /* Adjust the font size as needed */
+                  "
+                  >weniger Anzeigen</span
                 >
               </p>
             </q-card-section>
