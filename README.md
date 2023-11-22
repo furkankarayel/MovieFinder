@@ -1,4 +1,3 @@
-w
 <img src="https://i.imgur.com/qwJ87ei.png" width="250" height="250">
 
 # MovieFinder Project
