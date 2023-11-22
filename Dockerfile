@@ -1,18 +1,16 @@
-# Base Image ziehen
-FROM node:18.0-alpine
-# WORKING DIR auf den Pfad app setzen
+# Pull Base Image
+FROM node:20.0-alpine
+# Set WORKING DIR to the 'app' path
 WORKDIR /app
-# Kopiere package.json und package-lock.json
-COPY package*.json ./
-# Kopiere den Sourcecode der App
+# Copy package.json and package-lock.json
+COPY package.json ./
+# Copy the source code of the app
 COPY . .
-# Kopiere die Quasar Konfigurationsdatei 
+# Copy the Quasar configuration file
 COPY quasar.config.js ./
-# Installiere die Abhängigkeiten
+# Install dependencies
 RUN npm install
-# Installiere die Quasar CLI Abhängigkeit global
-RUN npm install -g @quasar/cli
-# Gebe den Port 8080 für den Container frei
+# Expose port 8080 for the container
 EXPOSE 8080
-# Baue die Quasar App auf
-CMD ["quasar","dev"]
+# Build the Quasar app
+CMD ["npm", "run", "dev"]
