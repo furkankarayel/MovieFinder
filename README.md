@@ -3,7 +3,7 @@
 
 ## MovieFinder Project
 
-A small web application for browsing movies or exploring random ones.
+A small frontend application which has been written for my webprogramming course at my university.
 
 
 <img src="https://i.imgur.com/BItgj5r.jpg" width="613" height="528">
